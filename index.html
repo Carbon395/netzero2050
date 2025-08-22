@@ -44,7 +44,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 </head>
 <body>
 <h1>臺北市旅宿業能源小管家</h1>
-<p>臺北市政府觀光傳播局協助旅宿業者管理年度能源使用與CO₂排放量，掌握減碳趨勢（單位：公噸 CO₂e）。</p>
+<p>臺北市政府觀光傳播局協助旅宿業者管理年度能源使用與CO₂排放量，掌握減碳趨勢（單位：公噸 CO₂e）</p>
 <div id="tips">
 <h3>💡 使用小提示</h3>
 <ul>
@@ -228,7 +228,7 @@ function exportExcel(){
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb,ws,document.getElementById(`${yearId}_label`).value);
   }
-  XLSX.writeFile(wb,'臺北市旅宿業CO2排放.xlsx');
+  XLSX.writeFile(wb,'臺北市旅宿業二氧化碳排放.xlsx');
 }
 
 function printReport(){
@@ -239,4 +239,5 @@ function printReport(){
 </script>
 </body>
 </html>
+
 
