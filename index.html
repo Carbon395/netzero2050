@@ -54,6 +54,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <li>「📊 匯出檔案」存成 Excel 報表</li>
 <li>「♻️ 重置資料」清空所有年度與圖表</li>
 <li>「🖨️ 列印報表」可列印完整年度資料與圖表</li>
+<li>排放係數資料來源：經濟部能源署、臺灣自來水公司、環境部氣候變遷署公告溫室氣體排放係數20240205公告版</li> 
 </ul>
 </div>
 <div style="text-align:center;">
@@ -86,7 +87,7 @@ let yearCount=0, chart, reductionChart;
 function addYear(){
   yearCount++;
   const yearId="year"+yearCount;
-  const defaultYear=2023+yearCount-1;
+  const defaultYear=2024+yearCount-1;
   let html=`<div class="year-block" id="${yearId}">
   <h2>年度：<input type="number" id="${yearId}_label" value="${defaultYear}"></h2>
   <button class="btn" onclick="removeYear('${yearId}')">❌ 刪除年度</button>
@@ -228,7 +229,7 @@ function exportExcel(){
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb,ws,document.getElementById(`${yearId}_label`).value);
   }
-  XLSX.writeFile(wb,'臺北市旅宿業二氧化碳排放.xlsx');
+  XLSX.writeFile(wb,'臺北市旅宿業能源使用情形.xlsx');
 }
 
 function printReport(){
@@ -239,5 +240,6 @@ function printReport(){
 </script>
 </body>
 </html>
+
 
 
