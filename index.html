@@ -93,8 +93,8 @@ function addYear(){
   <button class="btn" onclick="removeYear('${yearId}')">❌ 刪除年度</button>
   <div class="table-wrapper">
   <table><thead><tr>
-  <th>月份</th><th>電力 (度)</th><th>水 (度)</th><th>柴油 (L)</th>
-  <th>汽油 (L)</th><th>燃料油 (L)</th><th>天然氣 (M³)</th><th>液化石油氣 (L)</th><th>總排放量 (公噸 CO₂e)</th>
+  <th>月份</th><th>電力 (度)</th><th>水 (度)</th><th>柴油 (公升L)</th>
+  <th>汽油 (公升L)</th><th>燃料油 (公升L)</th><th>天然氣 (立方公尺M³)</th><th>液化石油氣 (公升L)</th><th>總排放量 (公噸 CO₂e)</th>
   </tr></thead><tbody>`;
   months.forEach((m,i)=>{
     html+=`<tr>
@@ -240,6 +240,7 @@ function printReport(){
 </script>
 </body>
 </html>
+
 
 
 
