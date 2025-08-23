@@ -44,14 +44,14 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 </head>
 <body>
 <h1>臺北市旅宿業能源小管家</h1>
-<p>臺北市政府觀光傳播局協助旅宿業者管理年度能源使用與CO₂排放量，掌握減碳趨勢（單位：公噸 CO₂e）</p>
+<p>臺北市政府觀傳局協助旅宿業者管理能源使用與二氧化碳排放量，掌握減碳趨勢（單位：公噸 CO₂e）</p>
 
 <div id="tips">
 <h3>💡 使用小提示</h3>
 <ul>
 <li>點擊「➕ 新增年度」建立年度輸入表格</li>
 <li>輸入每月能源使用量（電力、水、柴油、汽油、燃料油、天然氣、液化石油氣）</li>
-<li>系統自動計算每月與年度總排放量，折線圖即時更新</li>
+<li>系統自動計算每月與年度總排放量，圖表即時更新</li>
 <li>「📊 匯出檔案」存成 Excel 報表</li>
 <li>「♻️ 重置資料」清空所有年度與圖表</li>
 <li>「🖨️ 列印報表」可列印完整年度資料與圖表</li>
@@ -117,7 +117,7 @@ function addYear(){
   <div class="table-wrapper">
   <table><thead><tr>
   <th>月份</th><th>電力 (度)</th><th>水 (度)</th><th>柴油 (公升)</th> 
-  <th>汽油 (公升)</th><th>燃料油 (公升)</th><th>天然氣 (立方公尺)</th><th>液化石油氣 (公升L)</th><th>總排放量 (公噸 CO₂e)</th> 
+  <th>汽油 (公升)</th><th>燃料油 (公升)</th><th>天然氣 (立方公尺)</th><th>液化石油氣 (公升)</th><th>總排放量 (公噸 CO₂e)</th> 
   </tr></thead><tbody>`;
   months.forEach((m,i)=>{
     html+=`<tr>
@@ -270,3 +270,4 @@ function printReport(){ chart.resize(); reductionChart.resize(); window.print();
 </script>
 </body>
 </html>
+
