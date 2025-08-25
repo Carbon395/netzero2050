@@ -207,7 +207,7 @@ function updateSummary(years,totals){
     const cur=parseFloat(totals[i]);
     const red=prev-cur;
     const face = red>=0 ? '😊' : '😢';
-    const msg = red>=0 ? '' : ' ⚠️ 能源使用量相較上一年度增加，請落實能源管理，加強節能減碳';
+    const msg = red>=0 ? '' : ' ⚠️ 請落實能源管理，加強節能減碳';
     reductionHtml+=`<li>${years[i]}：${red.toFixed(3)} 公噸 CO₂e ${face}${msg}</li>`;
   }
   reductionHtml+="</ul>"; document.getElementById("reduction").innerHTML=reductionHtml;
@@ -291,4 +291,5 @@ function printReport(){
 </script>
 </body>
 </html>
+
 
