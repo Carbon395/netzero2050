@@ -75,12 +75,12 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <div id="yearContainer"></div>
 
 <div id="chart-container">
-  <h2>總排放量 (公噸 CO₂e)</h2>
+  <h2>碳總排放量（單位：公噸 CO₂e）</h2>
   <canvas id="chart" width="900" height="400"></canvas>
 </div>
 
 <div id="reduction-chart-container">
-  <h2>年度減碳量</h2>
+  <h2>年度減碳量（單位：公噸 CO₂e）</h2>
   <canvas id="reductionChart" width="900" height="300"></canvas>
 </div>
 
@@ -221,7 +221,7 @@ function updateSummary(years,totals){
       reductionHtml+=`<li>${years[i]}：基期年</li>`;
     } else {
       const face = red>=0 ? '😊' : '';
-      const msg = red>=0 ? '' : '請落實能源管理，加強節能減碳';
+      const msg = red>=0 ? '' : '😢 請落實能源管理，加強節能減碳';
       reductionHtml+=`<li>${years[i]}：${red.toFixed(3)} 公噸 CO₂e ${face} <span class="red-text">${msg}</span></li>`;
     }
   }
@@ -306,4 +306,5 @@ function printReport(){ window.print(); }
 </script>
 </body>
 </html>
+
 
