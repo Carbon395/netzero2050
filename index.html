@@ -75,12 +75,12 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <div id="yearContainer"></div>
 
 <div id="chart-container">
-  <h2>碳總排放量（單位：公噸 CO₂e）</h2>
+  <h2>碳總排放量（公噸 CO₂e）</h2>
   <canvas id="chart" width="900" height="400"></canvas>
 </div>
 
 <div id="reduction-chart-container">
-  <h2>年度減碳量（單位：公噸 CO₂e）</h2>
+  <h2>年度減碳量（公噸 CO₂e）</h2>
   <canvas id="reductionChart" width="900" height="300"></canvas>
 </div>
 
@@ -90,7 +90,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 </div>
 
 <div id="summary">
-<h2>📑 年度總覽（單位：公噸 CO₂e）</h2>
+<h2>📑 年度總覽（公噸 CO₂e）</h2>
 <div id="ranking"></div>
 <div id="trend"></div>
 <div id="reduction"></div>
@@ -294,7 +294,7 @@ function exportExcel(){
       row.push(parseFloat(document.getElementById(`${yearId}_total_${i}`).textContent)||0);
       ws_data.push(row);
     }
-    ws_data.push(['年度總排放量','', '', '', '', '', '', '', parseFloat(document.getElementById(`${yearId}_yearTotal`).textContent)||0]);
+    ws_data.push(['年度總排放量（公噸 CO₂e）','', '', '', '', '', '', '', parseFloat(document.getElementById(`${yearId}_yearTotal`).textContent)||0]);
     const ws=XLSX.utils.aoa_to_sheet(ws_data);
     XLSX.utils.book_append_sheet(wb, ws, yearLabel);
   });
@@ -306,5 +306,6 @@ function printReport(){ window.print(); }
 </script>
 </body>
 </html>
+
 
 
