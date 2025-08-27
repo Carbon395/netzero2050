@@ -75,7 +75,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <div id="yearContainer"></div>
 
 <div id="chart-container">
-  <h2>碳總排放量（公噸 CO₂e）</h2>
+  <h2>年度碳總排放量（公噸 CO₂e）</h2>
   <canvas id="chart" width="900" height="400"></canvas>
 </div>
 
@@ -148,7 +148,7 @@ function addYear(){
     </tr>`;
   });
   html+=`</tbody><tfoot><tr>
-    <th colspan="8">年度總排放量</th>
+    <th colspan="8">年度碳總排放量（公噸 CO₂e）</th>
     <th id="${yearId}_yearTotal" class="result">0</th>
   </tr></tfoot></table></div></div>`;
   document.getElementById("yearContainer").insertAdjacentHTML("beforeend",html);
@@ -203,12 +203,12 @@ function calcAll(){
 }
 
 function updateSummary(years,totals){
-  let rankHtml="<h3>年度排放排名</h3><ol>";
+  let rankHtml="<h3>碳排放量排名</h3><ol>";
   const sorted=years.map((y,i)=>({year:y,total:parseFloat(totals[i])})).sort((a,b)=>b.total-a.total);
   sorted.forEach(e=>{ rankHtml+=`<li>${e.year}：${e.total} 公噸 CO₂e</li>`; });
   rankHtml+="</ol>"; document.getElementById("ranking").innerHTML=rankHtml;
 
-  let trendHtml="<h3>年度總排放量趨勢</h3><ul>";
+  let trendHtml="<h3>碳排放量趨勢</h3><ul>";
   years.forEach((y,i)=>{ trendHtml+=`<li>${y}：${totals[i]} 公噸 CO₂e</li>`; });
   trendHtml+="</ul>"; document.getElementById("trend").innerHTML=trendHtml;
 
@@ -306,6 +306,7 @@ function printReport(){ window.print(); }
 </script>
 </body>
 </html>
+
 
 
 
