@@ -46,7 +46,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 </head>
 <body>
 <h1>臺北市旅宿業能源小管家</h1>
-<p>臺北市政府觀傳局協助旅宿業者管理能源使用與二氧化碳排放量，掌握減碳趨勢(單位：公噸 CO₂e)</p>
+<p>臺北市政府觀傳局協助旅宿業者管理能源使用與二氧化碳排放量，掌握減碳趨勢</p>
 
 <div id="tips">
 <h3>💡 使用小提示</h3>
@@ -76,17 +76,17 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 
 <div id="chart-container">
   <h2>年度碳排放量(公噸 CO₂e)</h2>
-  <canvas id="chart" width="900" height="400"></canvas>
+  <canvas id="chart" width="400" height="200"></canvas>
 </div>
 
 <div id="reduction-chart-container">
   <h2>年度減碳量(公噸 CO₂e)</h2>
-  <canvas id="reductionChart" width="900" height="300"></canvas>
+  <canvas id="reductionChart" width="400" height="200"></canvas>
 </div>
 
 <div id="energy-chart-container">
   <h2>年度能源使用量</h2>
-  <canvas id="energyChart" width="900" height="400"></canvas>
+  <canvas id="energyChart" width="400" height="200"></canvas>
 </div>
 
 <div id="summary">
@@ -306,6 +306,7 @@ function printReport(){ window.print(); }
 </script>
 </body>
 </html>
+
 
 
 
