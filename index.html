@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -6,47 +6,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2e7d32">
 <style>
-body { font-family: "微軟正黑體","Segoe UI", Arial, sans-serif; margin: 12px; background: #eaf5ea; }
-h1 { color: #2e7d32; text-align: center; margin-bottom: 10px; font-size: 1.9rem; font-weight:bold; text-shadow: 1px 1px 2px #ccc; }
-p { text-align: center; color: #555; margin-bottom: 20px; font-size:1rem; font-weight:bold; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", Arial, sans-serif; margin: 12px; background: #eaf5ea; }
+h1 { color: #2e7d32; text-align: center; font-size: 1.9rem; font-weight:bold; text-shadow: 1px 1px 2px #ccc; }
+h2.page-subtitle { text-align:center; color:#2e7d32; font-size:1rem; margin-bottom:15px; }
 #tips { background: #fff9c4; border-left: 6px solid #fbc02d; padding: 12px 15px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); font-size:0.95rem; }
 #tips h3 { margin-top: 0; color: #f57f17; font-size:1rem; }
 #tips ul { margin: 0; padding-left: 18px; }
 .btn { margin: 5px 3px; padding: 8px 18px; background: #2e7d32; color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; font-size: 14px; }
 .btn:hover { background: #1b5e20; }
-.year-block { margin-bottom: 35px; padding: 12px; border-radius: 10px; border: 2px solid #c8e6c9; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+.year-block { margin-bottom: 35px; padding: 12px; border-radius: 10px; border: 2px solid #c8e6c9; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.1); page-break-inside: avoid; }
 .year-block h2 { color: #388e3c; display: inline-block; margin-right: 10px; font-size:1.1rem; }
+.year-block input[type="text"] { width:300px; font-size:0.8rem; }
+.year-block input[type="number"] { width:80px; font-size:0.8rem; }
 .year-block button { font-size:0.9rem; padding:4px 10px; }
-.table-wrapper { overflow-x:auto; }
+.table-wrapper { overflow-x:auto; margin-top:10px; }
 table { border-collapse: collapse; width: 100%; margin-bottom: 15px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-th, td { border: 1px solid #ddd; padding: 6px; text-align: center; font-size:0.85rem; }
-th { background: #388e3c; color: #fff; }
-input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; border-radius: 4px; font-size:0.85rem; step:0.01; }
-.result { font-weight: bold; color: #000000; }
+th, td { border: 1px solid #ddd; padding: 6px; text-align: center; font-size:0.75rem; }
+th { background: #388e3c; color: #fff; text-align:center; }
+.result { font-weight: bold; color: #000; font-size:0.85rem; }
 .red-text { color:#e53935; font-weight:bold; }
-#chart-container, #reduction-chart-container, #energy-chart-container { margin-top: 30px; padding: 18px; background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-#chart-container h2, #reduction-chart-container h2, #energy-chart-container h2 { text-align:center; color:#2e7d32; margin-bottom:12px; }
+.green-text { color:#43a047; font-weight:bold; }
+#reduction-chart-container, #energy-chart-container { margin-top: 30px; padding: 18px; background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); page-break-inside: avoid; }
+#reduction-chart-container h2, #energy-chart-container h2 { text-align:center; color:#2e7d32; margin-bottom:12px; }
 #summary h2 { color: #2e7d32; margin-bottom: 12px; font-size:1.1rem; page-break-before:always; }
 @media screen and (max-width:600px){
-  input { width: 60px; font-size:0.8rem; }
-  .btn { padding:6px 12px; font-size:13px; }
-  #chart-container canvas, #energy-chart-container canvas { width:100% !important; height:auto !important; }
+  input { width:60px; font-size:0.75rem; }
+  .btn { padding:5px 10px; font-size:12px; }
+  .table-wrapper { overflow-x:auto; }
+  #energy-chart-container canvas, #reduction-chart-container canvas { width:100% !important; height:auto !important; }
 }
-/* 列印專用樣式 */
 @media print {
-  body { background: #fff; margin: 0; }
+  body { background: #fff; margin: 0; font-size: 12pt; }
   .btn, #tips, #globalHotelContainer { display: none; }
-  .table-wrapper { overflow: visible !important; }
-  table { page-break-inside: avoid; width: 100%; }
-  canvas { page-break-inside: avoid; max-width: 100% !important; height: auto !important; }
-  .year-block { page-break-inside: avoid; }
-  #chart-container, #reduction-chart-container, #energy-chart-container { break-inside: avoid; }
+  .year-block { page-break-inside: avoid; margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; }
+  .table-wrapper { overflow: visible !important; margin-bottom: 15px; }
+  table { page-break-inside: avoid; width: 100%; font-size: 10pt; border: 1px solid #000; }
+  th, td { border: 1px solid #000; padding: 5px; }
+  #reduction-chart-container, #energy-chart-container { break-inside: avoid; page-break-after: always; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  canvas { page-break-inside: avoid; max-width: 100% !important; height: 260px !important; }
+  #summary h2 { page-break-before: always; font-size: 14pt; }
+  footer { display: block; text-align: center; font-size: 10pt; margin-top: 20px; }
 }
 </style>
 </head>
 <body>
 <h1>臺北市旅宿業能源小管家</h1>
-<p>臺北市政府觀傳局協助旅宿業者管理能源使用與二氧化碳排放量，掌握減碳趨勢</p>
+<h2 class="page-subtitle">臺北市政府觀傳局協助旅宿業者管理能源使用與二氧化碳排放量</h2>
 
 <div id="tips">
 <h3>💡 使用小提示</h3>
@@ -54,7 +59,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <li>輸入旅館名稱，並點擊「➕ 新增年度」建立年度輸入表格，依序新增2024年、2025年等資料</li>
 <li>輸入每月能源使用量（電力、水、柴油、汽油、燃料油、天然氣、液化石油氣）</li>
 <li>系統自動計算每月與年度總排放量，圖表即時更新</li>
-<li>「📊 匯出檔案」存成 Excel 報表</li>
+<li>「📊 匯出檔案」存成 Excel 報表（含每月能源使用量）</li>
 <li>「♻️ 重置資料」清空所有年度與圖表</li>
 <li>「🖨️ 列印報表」可列印完整年度資料與圖表</li>
 <li>排放係數資料來源：經濟部能源署、臺灣自來水公司、環境部氣候變遷署公告溫室氣體排放係數20240205公告版</li> 
@@ -62,7 +67,7 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 </div>
 
 <div id="globalHotelContainer" style="text-align:center;margin-bottom:15px;">
-  <label>旅館名稱：<input type="text" id="globalHotelName" placeholder="請輸入旅館名稱" style="width:200px;" oninput="updateHotelNames()"></label>
+  <label>旅館名稱：<input type="text" id="globalHotelName" placeholder="請輸入旅館名稱" style="width:300px;" oninput="updateHotelNames()"></label>
 </div>
 
 <div style="text-align:center;">
@@ -73,11 +78,6 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 </div>
 
 <div id="yearContainer"></div>
-
-<div id="chart-container">
-  <h2>年度碳排放量(公噸 CO₂e)</h2>
-  <canvas id="chart" width="400" height="200"></canvas>
-</div>
 
 <div id="reduction-chart-container">
   <h2>年度減碳量(公噸 CO₂e)</h2>
@@ -96,7 +96,6 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <div id="reduction"></div>
 </div>
 
-
 <footer>
   Copyright © 2025 臺北市政府觀傳局 版權所有
 </footer>
@@ -105,60 +104,62 @@ input { width: 70px; padding: 3px; text-align: right; border: 1px solid #ccc; bo
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 <script>
-const factors={elec:0.474,water:0.156,diesel:2.606,gasoline:2.263,fuel_oil:3.111,ng:1.879,lpg:1.753};
-const months=["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
-const baseColors=["#e53935","#1e88e5","#43a047","#fbc02d","#8e24aa","#fb8c00","#00acc1","#7cb342","#f06292","#9575cd","#4dd0e1","#a1887f"];
-let yearCount=0, chart, reductionChart, energyChart;
+// 排放係數
+const factors = {
+  "電力(度)": 0.474,
+  "水(度)": 0.156,
+  "柴油(公升)": 2.606,
+  "汽油(公升)": 2.263,
+  "燃料油(公升)": 3.111,
+  "天然氣(立方公尺)": 1.879,
+  "液化石油氣(公升)": 1.753
+};
+const months = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+const baseColors = ["#1e88e5","#43a047","#fbc02d","#e53935","#8e24aa","#fb8c00","#00acc1"];
+let reductionChart, energyChart;
 
+// 同步旅館名稱
 function updateHotelNames(){
-  const name=document.getElementById("globalHotelName").value || "未填寫";
+  const name = document.getElementById("globalHotelName").value;
   document.querySelectorAll('.year-block').forEach(block=>{
-    const hotelInput=block.querySelector('input[id$="_hotel"]');
-    if(hotelInput){ hotelInput.value=name; }
+    const hotelInput = block.querySelector('input[id$="_hotel"]');
+    if(hotelInput) hotelInput.value = name;
   });
 }
 
+// 新增年度
 function addYear(){
-  yearCount++;
-  const yearId="year"+yearCount;
-  const defaultYear=2024+yearCount-1;
-  const hotelName=document.getElementById("globalHotelName").value || "未填寫";
-  let html=`<div class="year-block" id="${yearId}">
+  const yearContainer = document.getElementById("yearContainer");
+  const yearCount = yearContainer.children.length + 1;
+  const yearId = "year" + yearCount;
+  const defaultYear = 2024 + yearCount - 1;
+  const hotelName = document.getElementById("globalHotelName").value || "";
+
+  let html = `<div class="year-block" id="${yearId}">
   <h2>
-    旅館名稱：<input type="text" id="${yearId}_hotel" value="${hotelName}" readonly style="width:200px;">
+    旅館名稱：<input type="text" id="${yearId}_hotel" value="${hotelName}">
     年度：<input type="number" id="${yearId}_label" value="${defaultYear}">
   </h2>
   <button class="btn" onclick="removeYear('${yearId}')">❌ 刪除年度</button>
-  <div class="table-wrapper">
-  <table><thead><tr>
-    <th>月份</th><th>電力 (度)</th><th>水 (度)</th><th>柴油 (公升)</th>
-    <th>汽油 (公升)</th><th>燃料油 (公升)</th><th>天然氣 (立方公尺)</th><th>液化石油氣 (公升)</th><th>總排放量 (公噸 CO₂e)</th>
-  </tr></thead><tbody>`;
+  <div class="table-wrapper"><table><thead><tr><th>月份</th>`;
+  Object.keys(factors).forEach(f=>{ html+=`<th>${f}</th>`; });
+  html+=`<th>總排放量 (公噸 CO₂e)</th></tr></thead><tbody>`;
   months.forEach((m,i)=>{
-    html+=`<tr>
-      <td>${m}</td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_elec_${i}" oninput="calcAll()"></td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_water_${i}" oninput="calcAll()"></td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_diesel_${i}" oninput="calcAll()"></td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_gasoline_${i}" oninput="calcAll()"></td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_fuel_oil_${i}" oninput="calcAll()"></td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_ng_${i}" oninput="calcAll()"></td>
-      <td><input type="number" min="0" step="0.01" value="0" id="${yearId}_lpg_${i}" oninput="calcAll()"></td>
-      <td id="${yearId}_total_${i}" class="result">0</td>
-    </tr>`;
+    html+=`<tr><td>${m}</td>`;
+    Object.keys(factors).forEach(f=>{
+      html+=`<td><input type="number" min="0" step="0.001" value="0" id="${yearId}_${f}_${i}" oninput="calcAll()"></td>`;
+    });
+    html+=`<td id="${yearId}_total_${i}" class="result">0.000</td></tr>`;
   });
-  html+=`</tbody><tfoot><tr>
-    <th colspan="8">年度碳排放量(公噸 CO₂e)</th>
-    <th id="${yearId}_yearTotal" class="result">0</th>
-  </tr></tfoot></table></div></div>`;
-  document.getElementById("yearContainer").insertAdjacentHTML("beforeend",html);
+  html+=`</tbody><tfoot><tr><th colspan="8">年度碳排放量(公噸 CO₂e)</th><th id="${yearId}_yearTotal" class="result">0.000</th></tr></tfoot></table></div></div>`;
+  
+  yearContainer.insertAdjacentHTML("beforeend", html);
   calcAll();
 }
 
 function removeYear(id){
   const el=document.getElementById(id);
   if(el) el.remove();
-  yearCount = document.querySelectorAll('.year-block').length;
   calcAll();
 }
 
@@ -167,151 +168,140 @@ function resetAll(){
   document.getElementById("ranking").innerHTML="";
   document.getElementById("trend").innerHTML="";
   document.getElementById("reduction").innerHTML="";
-  if(chart) chart.destroy();
   if(reductionChart) reductionChart.destroy();
   if(energyChart) energyChart.destroy();
-  yearCount=0;
 }
 
 function calcAll(){
-  const years=[];
-  const yearTotals=[];
+  const years=[], yearTotals=[];
   document.querySelectorAll('.year-block').forEach(block=>{
-    const yearId = block.id;
-    const yearLabel = document.getElementById(yearId+"_label").value;
-    let yearSum = 0;
+    const yearId=block.id;
+    const yearLabel=document.getElementById(`${yearId}_label`).value;
+    let yearSum=0;
     for(let i=0;i<12;i++){
-      const elec=parseFloat(document.getElementById(`${yearId}_elec_${i}`).value)||0;
-      const water=parseFloat(document.getElementById(`${yearId}_water_${i}`).value)||0;
-      const diesel=parseFloat(document.getElementById(`${yearId}_diesel_${i}`).value)||0;
-      const gasoline=parseFloat(document.getElementById(`${yearId}_gasoline_${i}`).value)||0;
-      const fuel_oil=parseFloat(document.getElementById(`${yearId}_fuel_oil_${i}`).value)||0;
-      const ng=parseFloat(document.getElementById(`${yearId}_ng_${i}`).value)||0;
-      const lpg=parseFloat(document.getElementById(`${yearId}_lpg_${i}`).value)||0;
-      const total=(elec*factors.elec+water*factors.water+diesel*factors.diesel+gasoline*factors.gasoline+fuel_oil*factors.fuel_oil+ng*factors.ng+lpg*factors.lpg)/1000;
+      let total=0;
+      Object.keys(factors).forEach(f=>{
+        const val=parseFloat(document.getElementById(`${yearId}_${f}_${i}`).value)||0;
+        total+=val*factors[f]/1000;
+      });
       document.getElementById(`${yearId}_total_${i}`).textContent=total.toFixed(3);
       yearSum+=total;
     }
     document.getElementById(`${yearId}_yearTotal`).textContent=yearSum.toFixed(3);
     years.push(yearLabel);
-    yearTotals.push(yearSum.toFixed(3));
+    yearTotals.push(yearSum);
   });
   updateSummary(years,yearTotals);
-  updateChart(years);
   updateReductionChart(years,yearTotals);
   updateEnergyChart();
 }
 
 function updateSummary(years,totals){
   let rankHtml="<h3>碳排放量排名</h3><ol>";
-  const sorted=years.map((y,i)=>({year:y,total:parseFloat(totals[i])})).sort((a,b)=>b.total-a.total);
-  sorted.forEach(e=>{ rankHtml+=`<li>${e.year}：${e.total} 公噸 CO₂e</li>`; });
+  const sorted=years.map((y,i)=>({year:y,total:totals[i]})).sort((a,b)=>b.total-a.total);
+  sorted.forEach(e=>{ rankHtml+=`<li>${e.year}：${e.total.toFixed(3)} 公噸 CO₂e</li>`; });
   rankHtml+="</ol>"; document.getElementById("ranking").innerHTML=rankHtml;
 
   let trendHtml="<h3>碳排放量趨勢</h3><ul>";
-  years.forEach((y,i)=>{ trendHtml+=`<li>${y}：${totals[i]} 公噸 CO₂e</li>`; });
+  years.forEach((y,i)=>{ trendHtml+=`<li>${y}：${totals[i].toFixed(3)} 公噸 CO₂e</li>`; });
   trendHtml+="</ul>"; document.getElementById("trend").innerHTML=trendHtml;
 
   let reductionHtml="<h3>年度減碳量</h3><ul>";
   for(let i=0;i<totals.length;i++){
-    const prev=i>0?parseFloat(totals[i-1]):parseFloat(totals[i]);
-    const cur=parseFloat(totals[i]);
-    const red=prev-cur;
-    if(i===0) {
-      reductionHtml+=`<li>${years[i]}：基期年</li>`;
-    } else {
-      const face = red>=0 ? '😊' : '';
-      const msg = red>=0 ? '' : '😢 請落實能源管理，加強節能減碳';
-      reductionHtml+=`<li>${years[i]}：${red.toFixed(3)} 公噸 CO₂e ${face} <span class="red-text">${msg}</span></li>`;
+    if(i==0){ reductionHtml+=`<li>${years[i]}：基期年</li>`; }
+    else{
+      const diff=totals[i-1]-totals[i];
+      const icon=diff>=0?`<span class="green-text">😀 請繼續保持減碳</span>`:`<span class="red-text">😢 請加強能源使用管理，落實節能減碳</span>`;
+      reductionHtml+=`<li>${years[i]}：${diff.toFixed(3)} 公噸 CO₂e ${icon}</li>`;
     }
   }
   reductionHtml+="</ul>"; document.getElementById("reduction").innerHTML=reductionHtml;
 }
 
-function updateChart(labels){
-  const datasets=[];
-  document.querySelectorAll('.year-block').forEach((block,y)=>{
-    const yearId = block.id;
-    const data=[];
-    for(let i=0;i<12;i++) data.push(parseFloat(document.getElementById(`${yearId}_total_${i}`).textContent));
-    datasets.push({label:labels[y],data:data,borderColor:baseColors[y%baseColors.length],fill:false});
-  });
-  if(chart) chart.destroy();
-  const ctx=document.getElementById("chart").getContext("2d");
-  chart=new Chart(ctx,{type:'line',data:{labels:months,datasets:datasets},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
-}
-
-function updateReductionChart(labels,totals){
-  const data=[]; const bgColors=[];
-  for(let i=0;i<totals.length;i++){
-    const prev=i>0?parseFloat(totals[i-1]):parseFloat(totals[i]);
-    const val=prev-parseFloat(totals[i]);
-    data.push(val);
-    bgColors.push(val>=0?'#43a047':'#e53935');
-  }
+function updateReductionChart(years,totals){
+  const reduction=[]; for(let i=0;i<totals.length;i++){ reduction.push(i==0?0:totals[i-1]-totals[i]); }
   if(reductionChart) reductionChart.destroy();
   const ctx=document.getElementById("reductionChart").getContext("2d");
-  reductionChart=new Chart(ctx,{type:'bar',data:{labels:labels,datasets:[{label:'減碳量',data:data,backgroundColor:bgColors}]},options:{responsive:true,plugins:{legend:{display:false},datalabels:{color:'#000',anchor:'end',align:'end',formatter:(val)=>val.toFixed(2)}}}});
+  reductionChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels:years,datasets:[{label:'年度減碳量',data:reduction,backgroundColor:reduction.map(v=>v>=0?'#43a047':'#e53935')}]},
+    options:{
+      plugins:{
+        legend:{display:false},
+        datalabels:{
+          color:'#000',
+          font:{weight:'bold'},
+          formatter:function(value){ return value.toFixed(3); }
+        }
+      },
+      scales:{y:{beginAtZero:true}}
+    },
+    plugins:[ChartDataLabels]
+  });
 }
 
 function updateEnergyChart(){
-  const energyTypes=['elec','water','diesel','gasoline','fuel_oil','ng','lpg'];
-  const energyLabels=['電力','水','柴油','汽油','燃料油','天然氣','液化石油氣'];
-  const datasets=[];
-  const years=[];
-
-  document.querySelectorAll('.year-block').forEach((block,y)=>{
-    const yearId=block.id;
-    years.push(document.getElementById(`${yearId}_label`).value);
-    energyTypes.forEach((etype,i)=>{
-      if(!datasets[i]) datasets[i]={label:energyLabels[i],data:[],backgroundColor:baseColors[i%baseColors.length]};
-      let total=0;
-      for(let m=0;m<12;m++){
-        total+=parseFloat(document.getElementById(`${yearId}_${etype}_${m}`).value)||0;
-      }
-      datasets[i].data.push(total);
-    });
+  const labels=[]; const datasets=[];
+  document.querySelectorAll('.year-block').forEach(block=>{
+    labels.push(document.getElementById(`${block.id}_label`).value);
   });
-
+  Object.keys(factors).forEach((f,idx)=>{
+    const data=[];
+    document.querySelectorAll('.year-block').forEach(block=>{
+      let sum=0;
+      for(let i=0;i<12;i++){ sum+=(parseFloat(document.getElementById(`${block.id}_${f}_${i}`).value)||0); }
+      data.push(sum);
+    });
+    datasets.push({label:f,data:data,backgroundColor:baseColors[idx]});
+  });
   if(energyChart) energyChart.destroy();
   const ctx=document.getElementById("energyChart").getContext("2d");
-  energyChart=new Chart(ctx,{type:'bar',data:{labels:years,datasets:datasets},options:{responsive:true,plugins:{legend:{position:'bottom'},datalabels:{color:'#000',display:ctx=>{return ctx.dataset.data[ctx.dataIndex]>0},formatter:val=>val}}},scales:{x:{stacked:true},y:{stacked:true}}});
+  energyChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels:labels,datasets:datasets},
+    options:{
+      plugins:{
+        legend:{position:'bottom'},
+        datalabels:{
+          color:'#000',
+          font:{weight:'bold'},
+          formatter:function(value){ return value===0 ? '' : Math.round(value); }
+        }
+      },
+      scales:{y:{beginAtZero:true, stacked:true}, x:{stacked:true}}
+    },
+    plugins:[ChartDataLabels]
+  });
 }
 
 function exportExcel(){
-  const wb=XLSX.utils.book_new();
+  const wb = XLSX.utils.book_new();
   document.querySelectorAll('.year-block').forEach(block=>{
-    const ws_data=[];
-    const yearId=block.id;
-    const yearLabel=document.getElementById(`${yearId}_label`).value;
-    ws_data.push([`旅館名稱：`,document.getElementById(`${yearId}_hotel`).value]);
-    ws_data.push([`年度：`,yearLabel]);
-    const header=['月份','電力','水','柴油','汽油','燃料油','天然氣','液化石油氣','總排放量'];
-    ws_data.push(header);
+    const yearName = document.getElementById(`${block.id}_label`).value;
+    const ws_data = [];
+    // 表頭
+    ws_data.push(["月份", ...Object.keys(factors), "總排放量 (公噸 CO₂e)"]);
+    // 每月資料
     for(let i=0;i<12;i++){
-      const row=[months[i]];
-      ['elec','water','diesel','gasoline','fuel_oil','ng','lpg'].forEach(e=>row.push(parseFloat(document.getElementById(`${yearId}_${e}_${i}`).value)||0));
-      row.push(parseFloat(document.getElementById(`${yearId}_total_${i}`).textContent)||0);
+      const row = [months[i]];
+      Object.keys(factors).forEach(f=>{
+        const val = parseFloat(document.getElementById(`${block.id}_${f}_${i}`).value) || 0;
+        row.push(val);
+      });
+      const total = parseFloat(document.getElementById(`${block.id}_total_${i}`).textContent) || 0;
+      row.push(total.toFixed(3));
       ws_data.push(row);
     }
-    ws_data.push(['年度碳排放量(公噸 CO₂e)','', '', '', '', '', '', '', parseFloat(document.getElementById(`${yearId}_yearTotal`).textContent)||0]);
-    const ws=XLSX.utils.aoa_to_sheet(ws_data);
-    XLSX.utils.book_append_sheet(wb, ws, yearLabel);
+    // 年度總和
+    const yearTotal = parseFloat(document.getElementById(`${block.id}_yearTotal`).textContent) || 0;
+    ws_data.push(["年度總排放量", ...Array(Object.keys(factors).length).fill(""), yearTotal.toFixed(3)]);
+    const ws = XLSX.utils.aoa_to_sheet(ws_data);
+    XLSX.utils.book_append_sheet(wb, ws, `年度_${yearName}`);
   });
-  XLSX.writeFile(wb,"旅館能源使用資料.xlsx");
+  XLSX.writeFile(wb,'旅宿能源報表.xlsx');
 }
 
 function printReport(){ window.print(); }
-
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
