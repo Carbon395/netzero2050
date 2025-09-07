@@ -35,22 +35,39 @@ th { background: #388e3c; color: #fff; text-align:center; }
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  align-items: center; /* 垂直置中對齊 */
 }
 #globalHotelContainer label {
   flex-grow: 1;
   margin: 0 5px;
-  min-width: 120px;
+  /* min-width: 120px; */ /* 移除最小寬度限制，讓它彈性縮放 */
+}
+#globalHotelName, #globalDistrict {
+    flex-grow: 1;
+    min-width: 80px; /* 確保輸入框和選單不會太小 */
+}
+#logo-container {
+    text-align: center;
+    margin-top: 20px; /* 調整 Logo 上方間距 */
+    margin-bottom: 25px; /* 調整 Logo 下方間距，與版權文字分隔 */
+}
+#logo-container img {
+    max-width: 200px; /* 調整 Logo 的最大寬度 */
+    height: auto;
 }
 
 @media screen and (max-width:600px){
   input, select { width: 100%; font-size:0.75rem; }
   #globalHotelName, #globalDistrict { width: 100%; }
   #globalHotelContainer {
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* 保持在同一列 */
+    justify-content: space-between;
   }
   #globalHotelContainer label {
-    flex-basis: 100%;
+    flex-basis: 48%; /* 讓兩個欄位各佔約一半寬度 */
     margin-bottom: 10px;
+    display: flex; /* 讓 label 內的文字和 input/select 在一行 */
+    align-items: center;
   }
   .btn { padding:5px 10px; font-size:12px; }
   .table-wrapper { overflow-x:auto; }
@@ -90,8 +107,8 @@ th { background: #388e3c; color: #fff; text-align:center; }
 </div>
 
 <div id="globalHotelContainer">
-  <label>旅館名稱：<input type="text" id="globalHotelName" placeholder="請輸入旅館名稱" oninput="updateHotelNames()"></label>
-  <label>行政區：
+  <label>旅館名稱<input type="text" id="globalHotelName" placeholder="請輸入旅館名稱" oninput="updateHotelNames()"></label>
+  <label>行政區
     <select id="globalDistrict" required>
       <option value="">請選擇</option>
       <option value="中正區">中正區</option>
@@ -134,6 +151,10 @@ th { background: #388e3c; color: #fff; text-align:center; }
 <div id="ranking"></div>
 <div id="trend"></div>
 <div id="reduction"></div>
+</div>
+
+<div id="logo-container">
+    
 </div>
 
 <footer>
