@@ -16,7 +16,7 @@ h2.page-subtitle { text-align:center; color:#2e7d32; font-size:1rem; margin-bott
 .btn:hover { background: #1b5e20; }
 .year-block { margin-bottom: 35px; padding: 12px; border-radius: 10px; border: 2px solid #c8e6c9; background: #fff; box-shadow: 0 3px 8px rgba(0,0,0,0.1); page-break-inside: avoid; }
 .year-block h2 { color: #388e3c; display: inline-block; margin-right: 10px; font-size:1.1rem; }
-.year-block input[type="text"], .year-block select { width:180px; font-size:0.8rem; margin-right:5px; }
+.year-block input[type="text"], .year-block select { width: 220px; font-size: 0.8rem; margin-right: 5px; }
 .year-block input[type="number"] { width:80px; font-size:0.8rem; }
 .year-block button { font-size:0.9rem; padding:4px 10px; }
 .table-wrapper { overflow-x:auto; margin-top:10px; }
@@ -29,8 +29,29 @@ th { background: #388e3c; color: #fff; text-align:center; }
 #reduction-chart-container, #energy-chart-container { margin-top: 30px; padding: 18px; background: #fff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); page-break-inside: avoid; }
 #reduction-chart-container h2, #energy-chart-container h2 { text-align:center; color:#2e7d32; margin-bottom:12px; }
 #summary h2 { color: #2e7d32; margin-bottom: 12px; font-size:1.1rem; page-break-before:always; }
+#globalHotelContainer {
+  text-align: center;
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+#globalHotelContainer label {
+  flex-grow: 1;
+  margin: 0 5px;
+  min-width: 120px;
+}
+
 @media screen and (max-width:600px){
-  input, select { width:60px; font-size:0.75rem; }
+  input, select { width: 100%; font-size:0.75rem; }
+  #globalHotelName, #globalDistrict { width: 100%; }
+  #globalHotelContainer {
+    flex-wrap: wrap;
+  }
+  #globalHotelContainer label {
+    flex-basis: 100%;
+    margin-bottom: 10px;
+  }
   .btn { padding:5px 10px; font-size:12px; }
   .table-wrapper { overflow-x:auto; }
   #energy-chart-container canvas, #reduction-chart-container canvas { width:100% !important; height:auto !important; }
@@ -61,15 +82,15 @@ th { background: #388e3c; color: #fff; text-align:center; }
 <li>選擇行政區為必填欄位</li>
 <li>輸入每月能源使用量（電力、水、柴油、汽油、燃料油、天然氣、液化石油氣），若當月未使用該能源，可填 0</li>
 <li>系統自動計算每月與年度總排放量，圖表即時更新</li>
-<li>「📊 匯出檔案」存成 Excel 報表（含每月能源使用量、全年能源總和與年度總排放量）</li>
+<li>「📊 匯出檔案」存成 Excel 報表</li>
 <li>「♻️ 重置資料」清空所有年度與圖表</li>
 <li>「🖨️ 列印報表」可列印完整年度資料與圖表</li>
 <li>排放係數資料來源：經濟部能源署、臺灣自來水公司、環境部氣候變遷署公告溫室氣體排放係數20240205公告版</li>
 </ul>
 </div>
 
-<div id="globalHotelContainer" style="text-align:center;margin-bottom:15px;">
-  <label>旅館名稱：<input type="text" id="globalHotelName" placeholder="請輸入旅館名稱" style="width:180px;" oninput="updateHotelNames()"></label>
+<div id="globalHotelContainer">
+  <label>旅館名稱：<input type="text" id="globalHotelName" placeholder="請輸入旅館名稱" oninput="updateHotelNames()"></label>
   <label>行政區：
     <select id="globalDistrict" required>
       <option value="">請選擇</option>
@@ -176,10 +197,10 @@ function addYear(){
   calcAll();
 }
 
-function removeYear(id){ 
-  const el=document.getElementById(id); 
-  if(el) el.remove(); 
-  
+function removeYear(id){ 
+  const el=document.getElementById(id); 
+  if(el) el.remove(); 
+  
   const yearBlocks = document.querySelectorAll('.year-block');
   yearBlocks.forEach((block, index) => {
     const newId = `year${index + 1}`;
@@ -209,7 +230,7 @@ function removeYear(id){
       }
     }
   });
-  calcAll(); 
+  calcAll(); 
 }
 
 function resetAll(){ document.getElementById("yearContainer").innerHTML=""; if(reductionChart) reductionChart.destroy(); if(energyChart) energyChart.destroy(); document.getElementById("ranking").innerHTML=""; document.getElementById("trend").innerHTML=""; document.getElementById("reduction").innerHTML=""; }
@@ -218,7 +239,7 @@ function calcAll(){
   const yearBlocks = Array.from(document.querySelectorAll('.year-block'));
   const years = [];
   const yearTotals = [];
-  
+  
   yearBlocks.forEach(block => {
     const yearId = block.id;
     const yearLabel = document.getElementById(`${yearId}_label`).value;
@@ -233,7 +254,7 @@ function calcAll(){
       yearSum += total;
     }
     document.getElementById(`${yearId}_yearTotal`).textContent = yearSum.toFixed(3);
-    years.push(yearLabel); 
+    years.push(yearLabel); 
     yearTotals.push(yearSum);
   });
 
@@ -242,9 +263,9 @@ function calcAll(){
     .sort((a, b) => a.year - b.year);
   const sortedYears = sortedData.map(d => d.year);
   const sortedTotals = sortedData.map(d => d.total);
-  
-  updateReductionChart(sortedYears, sortedTotals); 
-  updateEnergyChart(); 
+  
+  updateReductionChart(sortedYears, sortedTotals); 
+  updateEnergyChart(); 
   updateSummary(sortedYears, sortedTotals);
 }
 
@@ -285,10 +306,10 @@ function updateReductionChart(years,yearTotals){
 
 function updateEnergyChart(){
   if(energyChart) energyChart.destroy();
-  
+  
   const yearBlocks = Array.from(document.querySelectorAll('.year-block'));
   const years = yearBlocks.map(block => document.getElementById(`${block.id}_label`).value).sort((a, b) => a - b);
-  
+  
   const datasets = Object.keys(factors).map((f, fIdx) => {
     const data = years.map(year => {
       const block = yearBlocks.find(b => document.getElementById(`${b.id}_label`).value == year);
@@ -352,39 +373,49 @@ function updateSummary(years,yearTotals){
 }
 
 function exportExcel(){
-  const wb=XLSX.utils.book_new();
-  document.querySelectorAll('.year-block').forEach(block=>{
-    const yearId=block.id;
-    const hotelName=document.getElementById(`${yearId}_hotel`).value;
-    const district=document.getElementById(`${yearId}_district`).value;
-    const yearLabel=document.getElementById(`${yearId}_label`).value;
-    const header=["旅館名稱","行政區","年度","月份",...Object.keys(factors),"月總能源使用量","月總排放量(公噸 CO₂e)"];
-    const ws_data=[header];
-    let annualEnergySum=0, annualCO2Sum=0;
-    for(let i=0;i<12;i++){
-      const row=[(i===0)?hotelName:'', (i===0)?district:'', (i===0)?yearLabel:'', months[i]];
-      let monthlyEnergy=0, monthlyCO2=0;
-      Object.keys(factors).forEach(f=>{
-        const val=parseFloat(document.getElementById(`${yearId}_${f}_${i}`).value)||0;
-        row.push(val);
-        monthlyEnergy+=val;
-        monthlyCO2+=val*factors[f]/1000;
-      });
-      row.push(monthlyEnergy.toFixed(3),monthlyCO2.toFixed(3));
-      ws_data.push(row);
-      annualEnergySum+=monthlyEnergy; annualCO2Sum+=monthlyCO2;
-    }
-    const footerRow=["全年總計","","",""];
-    Object.keys(factors).forEach(f=>{
-      let total=0; for(let i=0;i<12;i++){ total+=parseFloat(document.getElementById(`${yearId}_${f}_${i}`).value)||0; }
-      footerRow.push(total.toFixed(3));
-    });
-    footerRow.push(annualEnergySum.toFixed(3), annualCO2Sum.toFixed(3));
-    ws_data.push(footerRow);
-    const ws=XLSX.utils.aoa_to_sheet(ws_data);
-    XLSX.utils.book_append_sheet(wb,ws,`年度_${yearLabel}`);
-  });
-  XLSX.writeFile(wb,"旅宿能源報表.xlsx");
+  const wb=XLSX.utils.book_new();
+  document.querySelectorAll('.year-block').forEach(block=>{
+    const yearId=block.id;
+    const hotelName=document.getElementById(`${yearId}_hotel`).value;
+    const district=document.getElementById(`${yearId}_district`).value;
+    const yearLabel=document.getElementById(`${yearId}_label`).value;
+    
+    // 新增第一列，包含旅館名稱、行政區和年度資訊
+    const firstRow = ["旅館名稱", hotelName, "行政區", district, "年度", yearLabel];
+    
+    // 調整後的標頭列
+    const header=["月份",...Object.keys(factors),"月總能源使用量","月總排放量(公噸 CO₂e)"];
+    const ws_data=[firstRow, header];
+    
+    let annualEnergySum=0, annualCO2Sum=0;
+    for(let i=0;i<12;i++){
+      const row=[months[i]];
+      let monthlyEnergy=0, monthlyCO2=0;
+      Object.keys(factors).forEach(f=>{
+        const val=parseFloat(document.getElementById(`${yearId}_${f}_${i}`).value)||0;
+        row.push(val);
+        monthlyEnergy+=val;
+        monthlyCO2+=val*factors[f]/1000;
+      });
+      row.push(monthlyEnergy.toFixed(3),monthlyCO2.toFixed(3));
+      ws_data.push(row);
+      annualEnergySum+=monthlyEnergy; annualCO2Sum+=monthlyCO2;
+    }
+    const footerRow=["全年總計"];
+    Object.keys(factors).forEach(f=>{
+      let total=0; for(let i=0;i<12;i++){ total+=parseFloat(document.getElementById(`${yearId}_${f}_${i}`).value)||0; }
+      footerRow.push(total.toFixed(3));
+    });
+    footerRow.push(annualEnergySum.toFixed(3), annualCO2Sum.toFixed(3));
+    ws_data.push(footerRow);
+    const ws=XLSX.utils.aoa_to_sheet(ws_data);
+    
+    // 合併第一列的儲存格，讓標題更美觀
+    ws['!merges'] = [{ s: { r: 0, c: 1 }, e: { r: 0, c: 2 } }, { s: { r: 0, c: 3 }, e: { r: 0, c: 4 } }];
+    
+    XLSX.utils.book_append_sheet(wb,ws,`年度_${yearLabel}`);
+  });
+  XLSX.writeFile(wb,"旅宿能源報表.xlsx");
 }
 
 function printReport(){ window.print(); }
