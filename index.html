@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -126,6 +126,36 @@ th { background: #388e3c; color: #fff; text-align:center; }
     display: none;
     padding: 12px;
 }
+/* 針對旅館名稱和年度欄位的新樣式 */
+.year-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  color: #388e3c;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.year-header .field-group {
+  display: flex;
+  align-items: center;
+}
+.year-header label {
+  white-space: nowrap;
+}
+.year-header input[type="text"],
+.year-header input[type="number"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 8px;
+  min-width: 100px;
+  font-size: 0.9rem;
+  width: auto;
+}
+.year-header .btn {
+  margin-left: auto; /* 將刪除按鈕推到右側 */
+}
 @media screen and (max-width:600px){
   h1 { font-size: 1.6rem; }
   .btn { padding:5px 10px; font-size:12px; }
@@ -189,7 +219,7 @@ th { background: #388e3c; color: #fff; text-align:center; }
   <li>輸入能源（電力、水、柴油、汽油、燃料油、天然氣、液化石油氣）使用量至整數位為原則，若未使用該能源，請填 0</li>
   <li>系統自動計算每月與年度總排放量，圖表即時更新</li>
   <li>「📊 匯出檔案」存成 Excel 報表</li>
-  <li>「♻️ 重置資料」清空所有年度與圖表</li>
+  <li>♻️ 重置資料」清空所有年度與圖表</li>
   <li>「🖨️ 列印報表」可列印完整年度資料與圖表</li>
   <li>二氧化碳排放係數，參考經濟部能源署、臺灣自來水公司、環境部氣候變遷署公告溫室氣體排放係數20240205公告版</li>
   </ul>
@@ -287,15 +317,33 @@ function addYear(){
   const defaultYear = 2024+yearCount-1;
   const hotelName = document.getElementById("globalHotelName").value||"";
   const district = document.getElementById("globalDistrict").value||"";
+
+  // 新增強制輸入旅館名稱的檢查
+  if (!hotelName) {
+    alert("請先輸入旅館名稱！");
+    return;
+  }
   if (!district) {
-    alert("請先在上方選擇行政區！");
+    alert("請先選擇行政區！");
     return;
   }
 
   let html=`<div class="year-block" id="${yearId}">
-  <h2>旅館名稱：<input type="text" id="${yearId}_hotel" value="${hotelName}" readonly> 行政區：
-  <input type="text" id="${yearId}_district" value="${district}" readonly> 年度：<input type="number" id="${yearId}_label" value="${defaultYear}" readonly></h2>
-  <button class="btn" onclick="if(confirm('確定刪除此年度資料嗎？')) removeYear('${yearId}')">❌ 刪除年度</button>
+  <div class="year-header">
+    <div class="field-group">
+      <label for="${yearId}_hotel">旅館名稱：</label>
+      <input type="text" id="${yearId}_hotel" value="${hotelName}" readonly>
+    </div>
+    <div class="field-group">
+      <label for="${yearId}_district">行政區：</label>
+      <input type="text" id="${yearId}_district" value="${district}" readonly>
+    </div>
+    <div class="field-group">
+      <label for="${yearId}_label">年度：</label>
+      <input type="number" id="${yearId}_label" value="${defaultYear}" readonly>
+    </div>
+    <button class="btn" onclick="if(confirm('確定刪除此年度資料嗎？')) removeYear('${yearId}')">❌ 刪除年度</button>
+  </div>
   <div class="table-wrapper"><table><thead><tr><th>月份</th>`;
   Object.keys(factors).forEach(f=>{ html+=`<th>${f}</th>`; });
   html+=`<th>總排放量 (公噸 CO₂e)</th></tr></thead><tbody>`;
